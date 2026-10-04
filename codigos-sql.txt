@@ -1,0 +1,16 @@
+create table usuario(
+	id UUID primary key,
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(150) NOT NULL UNIQUE,
+	senha VARCHAR(255) NOT NULL,
+	tarefas VARCHAR[]
+);
+
+CREATE TABLE tarefa (
+    id UUID PRIMARY KEY,
+    titulo VARCHAR(30) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    concluida BOOLEAN DEFAULT FALSE,
+    usuario_id UUID NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
