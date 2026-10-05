@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +28,12 @@ public class Tarefa {
     @NotBlank(message = "A descrição da tarefa não pode ser nulo.")
     @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "data_criacao")
+    private LocalDate dataCriacao;
+
+    @Column(name = "data_finalizada")
+    private LocalDate dataFinalizada;
 
     @Column(name = "concluida")
     private Boolean concluida = false;

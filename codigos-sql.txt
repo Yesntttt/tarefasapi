@@ -12,5 +12,6 @@ CREATE TABLE tarefa (
     descricao VARCHAR(255) NOT NULL,
     concluida BOOLEAN DEFAULT FALSE,
     usuario_id UUID NOT NULL,
+
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );

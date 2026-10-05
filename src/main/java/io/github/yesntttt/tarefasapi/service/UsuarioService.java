@@ -1,16 +1,19 @@
 package io.github.yesntttt.tarefasapi.service;
 
-import io.github.yesntttt.tarefasapi.dto.UsuarioDTORequest;
-import io.github.yesntttt.tarefasapi.dto.UsuarioDTOResponse;
+import io.github.yesntttt.tarefasapi.dto.*;
 import io.github.yesntttt.tarefasapi.exceptions.RegistroDuplicadoException;
 import io.github.yesntttt.tarefasapi.mapper.UsuarioMapper;
+import io.github.yesntttt.tarefasapi.model.Tarefa;
 import io.github.yesntttt.tarefasapi.model.Usuario;
 import io.github.yesntttt.tarefasapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +22,7 @@ public class UsuarioService {
     private final UsuarioRepository repository;
     private final UsuarioMapper mapper;
 
-    public UsuarioDTOResponse salvar(UsuarioDTORequest request) {
+    public UsuarioNovoCadastradoDTO salvar(UsuarioDTORequest request) {
         boolean usuarioEncontrado = repository.existsByEmail(request.email());
 
         if(usuarioEncontrado) {
@@ -30,7 +33,7 @@ public class UsuarioService {
 
         repository.save(usuario);
 
-        return mapper.entityToResponse(usuario);
+        return mapper.entityToUsuarioNovoCadastrado(usuario);
     }
 
     public UsuarioDTOResponse buscarPorId(UUID id) {
@@ -46,6 +49,6 @@ public class UsuarioService {
 
         return usuarios.stream()
                 .map(mapper::entityToResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

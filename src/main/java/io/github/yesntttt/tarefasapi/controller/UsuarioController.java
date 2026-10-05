@@ -1,7 +1,6 @@
 package io.github.yesntttt.tarefasapi.controller;
 
-import io.github.yesntttt.tarefasapi.dto.UsuarioDTORequest;
-import io.github.yesntttt.tarefasapi.dto.UsuarioDTOResponse;
+import io.github.yesntttt.tarefasapi.dto.*;
 import io.github.yesntttt.tarefasapi.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UsuarioDTOResponse> salvar(@RequestBody @Valid UsuarioDTORequest request) {
+    public ResponseEntity<UsuarioNovoCadastradoDTO> salvarTarefa(@RequestBody @Valid UsuarioDTORequest request) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(service.salvar(request));

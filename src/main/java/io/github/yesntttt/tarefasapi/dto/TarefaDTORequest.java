@@ -13,8 +13,6 @@ public record TarefaDTORequest(
         @NotBlank(message="A descrição da tarefa não pode ser nulo.")
         String descricao,
 
-        Boolean concluida,
-
         @NotNull(message = "O id do usuário deve ser informado.")
         UUID usuarioId
     ) {

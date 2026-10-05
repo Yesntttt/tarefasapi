@@ -3,12 +3,11 @@ package io.github.yesntttt.tarefasapi.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record TarefaDTOResponse(
+public record TarefaNovaCadastradaDTO(
         UUID id,
-        String titulo,
+        String tituloString,
         String descricao,
         LocalDate dataCriacao,
-        LocalDate dataFinalizada,
         Boolean concluida
-)   {
+) {
 }

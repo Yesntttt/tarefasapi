@@ -3,6 +3,7 @@ package io.github.yesntttt.tarefasapi.controller.common;
 import io.github.yesntttt.tarefasapi.dto.ErroResposta;
 import io.github.yesntttt.tarefasapi.exceptions.OperacaoNaoPermitidaException;
 import io.github.yesntttt.tarefasapi.exceptions.RegistroDuplicadoException;
+import io.github.yesntttt.tarefasapi.exceptions.RegistroNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,6 +24,16 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErroResposta handleRegistroDuplicadoException(RegistroDuplicadoException e) {
         return ErroResposta.conflito(e.getMessage());
+    }
+
+    @ExceptionHandler(RegistroNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErroResposta handleRegistroNaoEncontradoException(RegistroNaoEncontradoException e) {
+        return new ErroResposta(
+                HttpStatus.NOT_FOUND.value(),
+                e.getMessage(),
+                List.of()
+        );
     }
 
     @ExceptionHandler(RuntimeException.class)
